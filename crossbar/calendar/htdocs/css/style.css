@@ -1,0 +1,28 @@
+#main-calendar table{
+    margin: auto;
+    border: none !important;
+    border-collapse: separate !important;
+    empty-cells: hide;
+
+}
+#main-calendar tr{
+    border: none !important;
+}
+.calendar-day td{
+    /*border: 1px solid black !important;*/
+    /*border-radius: 50px !important;*/
+    width: 100px;
+    height: 100px;
+    border-collapse: separate !important;
+}
+.day-number{
+    display: table;
+    margin: auto;
+    font-size: 70px;
+}
+.calendar-day-head td{
+
+    display: table !important;
+    margin: auto !important;
+    border: none !important;
+}
