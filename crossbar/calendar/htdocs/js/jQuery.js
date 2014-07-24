@@ -10,4 +10,21 @@ $('document').ready(function(){
         $('.modal-title').text($('.select-date').text())
         $('#Modal').modal('show');
     });
+
+
+//    AJAX
+    $.ajax({
+        url:window.location,
+        type:'POST',
+        data:{
+            date: 'select-date',
+            title:,
+            body:
+        } ,
+        success: function(){
+//            close modal
+//            add background-color to td
+            location.reload();
+        }
+    });
 });

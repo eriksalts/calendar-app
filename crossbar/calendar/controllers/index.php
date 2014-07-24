@@ -4,24 +4,21 @@ class index_controller extends base_controller
 {
 	public function index()
 	{
-		// ------------------------------------------------------
-		// This is where you'd put the logic for your index page
-		// For this sample site, there isn't much so we're going
-		// to ust set a variable and then print it out in the
-		// view, which can be found in views/index/index.phtml
-		// ------------------------------------------------------
-//		$this->foo = "This is the value off \$this->foo set in the index_controller and function index()";
 
         /* draws a calendar */
+        $year = date ('Y');
+        $month_title = date ('F');
+        $month_display = date ('n');
+
         function draw_calendar($month,$year){
 
             /* draw table */
             $calendar = '<div class="container">';
             $calendar .= '<div id="main-calendar" class="table-responsive">';
-            $calendar .= '<table cellpadding="0" cellspacing="0" class="calendar table">';
+            $calendar .= '<table cellpadding="0" cellspacing="0" class="calendar table-bordered">';
 
             /* table headings */
-            $headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+            $headings = array('S','M','T','W','T','F','S');
             $calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 
             /* days and weeks vars now ... */
@@ -41,8 +38,17 @@ class index_controller extends base_controller
             endfor;
 
             /* keep going with days.... */
+            //            for($list_day = 1; $list_day <= $days_in_month; $list_day++):
+            //                $calendar.= '<td class="calendar-day">';
+            //                /* add in the day number */
+            //                $calendar.= '<div class="day-number">'.$list_day.'</div>';
+
             for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-                $calendar.= '<td class="calendar-day">';
+                if($list_day == $today && $month == $nowmonth && $year == $nowyear) {
+                    $calendar.= '<td class="calendar-day-today">';
+                } else {
+                    $calendar.= '<td class="calendar-day">';
+                }
                 /* add in the day number */
                 $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
@@ -76,14 +82,23 @@ class index_controller extends base_controller
 
             /* all done, return result */
 
+
             return $calendar;
         }
+        //        cerate date-title for calendar
+        function draw_calendar_title($month_title, $year){
+            $calendar_title = '<h1 class="calendar-title">'.$month_title.'<small>'.$year.'</small></h1>';
+            return $calendar_title;
+        }
 
-        /* sample usages */
-        echo date('F, Y');
-        echo draw_calendar('F', 'Y');
 
-	}
+        //        display calendar
+        echo draw_calendar_title($month_title,$year);
+        echo draw_calendar($month_display,$year);
+
+    }
+
+
 
 }
 

@@ -8,9 +8,9 @@
 #main-calendar tr{
     border: none !important;
 }
-.calendar-day td{
+#main-calendar td{
     /*border: 1px solid black !important;*/
-    /*border-radius: 50px !important;*/
+    border-radius: 50px !important;
     width: 100px;
     height: 100px;
     border-collapse: separate !important;
@@ -20,9 +20,27 @@
     margin: auto;
     font-size: 70px;
 }
-.calendar-day-head td{
+#main-calendar .calendar-day-head{
 
-    display: table !important;
+    text-align: center;
     margin: auto !important;
     border: none !important;
+}
+#main-calendar .calendar-day-head:first-child,
+#main-calendar .calendar-day-head:last-child{
+    color:red;
+}
+
+#main-calendar .calendar-day-today{
+    background-color: #f00;
+}
+.input-group{
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom:30px;
+    max-width: 400px;
+}
+.calendar-title{
+    text-align: center;
+
 }
