@@ -4,12 +4,27 @@ class index_controller extends base_controller
 {
 	public function index()
 	{
-        $this->draw_calendar();
+        //$this->foo = "This is the value of \$this->foo set in the index_controller and function index()";
+        $year = "2014";
+        $month = "July";
+        $month_title = "July";
+        //$month_display = date ('n');
+//        if (isset($_GET['month'[) {
+//            $month = $_GET['month'];
+//        } else {
+//            $month = date('m');
+//        }
+//        if (isset($_GET['year'[) {
+//            $year = $_GET['year'];
+//        } else {
+//            $year = date('Y');
+//        }
+        $this->calendar = $this->draw_calendar($month, $year);
+        $this->calendar_title = $this->draw_calendar_title($month_title, $year);
     }
 
     private function draw_calendar($month,$year)
     {
-
             /* draw table */
             $calendar = '<div class="container">';
             $calendar .= '<div id="main-calendar" class="table-responsive">';
@@ -87,27 +102,24 @@ class index_controller extends base_controller
 
             return $calendar;
 
+    }
 
 
 
-        $year = date ('Y');
-        $month_title = date ('F');
-        $month_display = date ('n');
 
+    private function draw_calendar_title($month_title, $year){
 
-        //        cerate date-title for calendar
-        function draw_calendar_title($month_title, $year){
             $calendar_title = '<h1 class="calendar-title">'.$month_title.'<small>'.$year.'</small></h1>';
             return $calendar_title;
         }
 
 
-        //        display calendar
-        echo draw_calendar_title($month_title,$year);
-        echo draw_calendar($month_display,$year);
+//        //        display calendar
+//        echo draw_calendar_title($month_title,$year);
+//        echo draw_calendar($month_display,$year);
 
     }
 
-}
+
 
 ?>
