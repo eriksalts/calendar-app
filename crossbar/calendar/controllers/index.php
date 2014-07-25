@@ -4,13 +4,11 @@ class index_controller extends base_controller
 {
 	public function index()
 	{
+        $this->draw_calendar();
+    }
 
-        /* draws a calendar */
-        $year = date ('Y');
-        $month_title = date ('F');
-        $month_display = date ('n');
-
-        function draw_calendar($month,$year){
+    private function draw_calendar($month,$year)
+    {
 
             /* draw table */
             $calendar = '<div class="container">';
@@ -53,7 +51,11 @@ class index_controller extends base_controller
                 $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
-                $calendar.= str_repeat('<p> </p>',2);
+                $sql = "SELECT * FROM notes WHERE notes.date = '$day, $month, $year'";
+                $result = mysql::query('main', $sql);
+                foreach ($result as $note) {
+                    $calendar .= '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'] . '</div>';
+                }
 
                 $calendar.= '</td>';
                 if($running_day == 6):
@@ -84,7 +86,15 @@ class index_controller extends base_controller
 
 
             return $calendar;
-        }
+
+
+
+
+        $year = date ('Y');
+        $month_title = date ('F');
+        $month_display = date ('n');
+
+
         //        cerate date-title for calendar
         function draw_calendar_title($month_title, $year){
             $calendar_title = '<h1 class="calendar-title">'.$month_title.'<small>'.$year.'</small></h1>';
@@ -97,8 +107,6 @@ class index_controller extends base_controller
         echo draw_calendar($month_display,$year);
 
     }
-
-
 
 }
 
