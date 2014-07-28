@@ -1,0 +1,7 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteRule !\.(js|ico|gif|jpg|png|css|html|pdf)$ index.php
+
+AddType application/x-httpd-php .css
+ddType application/x-httpd-php .js

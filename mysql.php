@@ -14,6 +14,7 @@ class mysql
 						'database'	=> $database,
 						'username'	=> $username,
 						'password'	=> $password
+
 					);
 
 	}
