@@ -96,7 +96,7 @@ class index_controller extends base_controller
 
 
 
-
+                $calendar .= '<div class="note-wrapper">';
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
                $sql = 'SELECT * FROM notes WHERE date = "' . $this->year . '-' . $this->month . '-' . $list_day . '";';
                $result = mysql::query('main', $sql);
@@ -105,9 +105,10 @@ class index_controller extends base_controller
                 foreach ($result as $note) {
                    $calendar .= '<div class="note-present"' . $note['id'] . '"></div>';
 
-                  // $display_note = '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'] . '</div>';
+                  $calendar .= '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'] . '</div>';
 
                 }
+                $calendar .= '</div>';
 
 
 

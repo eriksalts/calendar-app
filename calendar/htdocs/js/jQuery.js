@@ -16,7 +16,7 @@ $('document').ready(function(){
     $( ".note-present" ).parent().addClass('note-background');
 
 //    $( ".note-view").replaceWith( "note" );
-
+    $('.note-view').html( $('.notes-wrapper').html() );
       //////////////////////////////////////////////////////////////
         $("#form-submit").click(function (e) {
             e.preventDefault();
