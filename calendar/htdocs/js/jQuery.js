@@ -1,11 +1,11 @@
 $('document').ready(function(){
-//    $(function() {
-//        $( "#datepicker" ).datepicker();
-//    });
 
-    $('.note-view').html( $('.note-wrapper').append());
-    $('.note-wrapper').attr('id', 'input-date');
-    $('#calendar').find('.note').hide('div.note');
+
+    //$('.note-view').html( $('.note-wrapper').append());
+    //$('.note-wrapper').attr('id', 'input-date');
+    var day = $('.select-date').text();
+    $('#input-date' + day + '#note-wrapper').html();
+    $('#calendar').find('.note').hide('.note');
     $('#calendar').find('button').hide('button');
 
 

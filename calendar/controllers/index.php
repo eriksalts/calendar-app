@@ -88,13 +88,13 @@ class index_controller extends base_controller
 
             /* keep going with days.... */
                         for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-                            $calendar.= '<td class="calendar-day">';
+                            $calendar.= '<td class="calendar-day" id="input-date"' . $list_day . '>';
                             /* add in the day number */
                             $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
 
 
-                            $calendar .= '<div class="note-wrapper" >';
+                $calendar .= '<div id="note-wrapper"'. $list_day . '>';
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
                $sql = 'SELECT * FROM notes WHERE date = "' . $this->year . '-' . $this->month . '-' . $list_day . '";';
                $result = mysql::query('main', $sql);

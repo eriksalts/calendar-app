@@ -9,6 +9,9 @@ class note_controller extends base_controller
             $note->save();
             return 'saved';
         }
+//        if ($_POST['action'] == 'delete') {
+//            $note = DELETE FROM add_delete_record WHERE id="note"
+//        }
     }
 
     public function submit()
