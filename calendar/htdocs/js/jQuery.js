@@ -3,7 +3,7 @@ $('document').ready(function(){
 
     //$('.note-view').html( $('.note-wrapper').append());
     //$('.note-wrapper').attr('id', 'input-date');
-    var day = $('.select-date').text();
+
     $('#calendar').find('.note').hide('.note');
     $('#calendar').find('button').hide('button');
 
@@ -12,31 +12,25 @@ $('document').ready(function(){
         function(){ $(this).addClass('select-date') },
         function(){ $(this).removeClass('select-date') }
     );
+    var day = $('.select-date').text();
 
     $('.calendar-day').click(function(){
         $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + $('.select-date').text());
         $('.modal-title').text($('#select-month').text() +' / '+ $('.select-date').text() +' / '+ $('#select-year').text());
-        var day = $('.select-date').text();
-        $('#input-date'+ ' ' + day + ' ' + ' .note-wrapper').html();
+        //var day = $('.select-date').text();
 
-
+        var chosen = $('#input-date-'+ day + ' ' + '.note-wrapper').html();
+       $(chosen).html($('.note-view').html());
 
        //Bootstrap API
         $('#Modal').modal('show');
     });
 
 
-
-
-
 //    $( ".note-view").replaceWith( "note" );
 
 
    // $( ".note-present" ).parent().addClass('note-background');
-
-   // $( ".note-present" ).parent().addClass('note-background');
-
-
 
 
 //    $('td').children('.note-wrapper').remove('.note-wrapper');
@@ -105,32 +99,4 @@ $('document').ready(function(){
             });
         });
 
-
-//        //##### Send delete Ajax request to response.php #########
-//        $("body").on("click", "#responds .del_button", function(e) {
-//            e.preventDefault();
-//            var clickedID = this.id.split('-'); //Split ID string (Split works as PHP explode)
-//            var DbNumberID = clickedID[1]; //and get number from array
-//            var myData = 'recordToDelete='+ DbNumberID; //build a post data structure
-//
-//            $('#item_'+DbNumberID).addClass( "sel" ); //change background of this element by adding class
-//            $(this).hide(); //hide currently clicked delete button
-//
-//            jQuery.ajax({
-//                type: "POST", // HTTP method POST or GET
-//                url: "response.php", //Where to make Ajax calls
-//                dataType:"text", // Data type, HTML, json etc.
-//                data:myData, //Form variables
-//                success:function(response){
-//                    //on success, hide  element user wants to delete.
-//                    $('#item_'+DbNumberID).fadeOut();
-//                },
-//                error:function (xhr, ajaxOptions, thrownError){
-//                    //On error, we alert user
-//                    alert(thrownError);
-//                }
-//            });
-//        });
-//
-//    });
 });
