@@ -2,21 +2,45 @@ $('document').ready(function(){
 //    $(function() {
 //        $( "#datepicker" ).datepicker();
 //    });
+
+    $('.note-view').html( $('.note-wrapper').append());
+    $('.note-wrapper').attr('id', 'input-date');
+    $('#calendar').find('.note').hide('div.note');
+    $('#calendar').find('button').hide('button');
+
+
     $('.calendar-day').hover(
         function(){ $(this).addClass('select-date') },
         function(){ $(this).removeClass('select-date') }
     );
 
     $('.calendar-day').click(function(){
-        $('.modal-title').text($('#select-month').text() +' '+ $('.select-date').text() +', '+ $('#select-year').text());
         $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + $('.select-date').text());
+        $('.modal-title').text($('#select-month').text() +' / '+ $('.select-date').text() +' / '+ $('#select-year').text());
+
+
+
+
        //Bootstrap API
         $('#Modal').modal('show');
     });
-    $( ".note-present" ).parent().addClass('note-background');
+
+
+
+
 
 //    $( ".note-view").replaceWith( "note" );
-    $('.note-view').html( $('.notes-wrapper').html() );
+
+
+   // $( ".note-present" ).parent().addClass('note-background');
+
+   // $( ".note-present" ).parent().addClass('note-background');
+
+
+
+
+//    $('td').children('.note-wrapper').remove('.note-wrapper');
+
       //////////////////////////////////////////////////////////////
         $("#form-submit").click(function (e) {
             e.preventDefault();
@@ -35,6 +59,7 @@ $('document').ready(function(){
                 title: $('#title').val(),
                 body: $('#body').val()
             }
+
             console.log(myData);
             $.ajax({
                 type: "POST", // HTTP method POST or GET
@@ -56,6 +81,30 @@ $('document').ready(function(){
                 }
             });
         });
+
+        var deleteData = {
+            action: 'delete',
+            id: $('#note').attr('id')
+        };
+        $("#delete-button").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST", // HTTP method POST or GET
+                url: "note", //Where to make Ajax calls
+                dataType:"text", // Data type, HTML, json etc.
+                data:deleteData, //Form variables
+                success:function(response){
+                    //on success, hide  element user wants to delete.
+                    $('#note').fadeOut();
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                    //On error, we alert user
+                    alert(thrownError);
+                }
+            });
+        });
+
 
 //        //##### Send delete Ajax request to response.php #########
 //        $("body").on("click", "#responds .del_button", function(e) {
@@ -82,5 +131,6 @@ $('document').ready(function(){
 //                }
 //            });
 //        });
-
+//
+//    });
 });
