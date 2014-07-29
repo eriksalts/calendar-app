@@ -4,7 +4,6 @@ $('document').ready(function(){
     //$('.note-view').html( $('.note-wrapper').append());
     //$('.note-wrapper').attr('id', 'input-date');
     var day = $('.select-date').text();
-    $('#input-date' + day + '#note-wrapper').html();
     $('#calendar').find('.note').hide('.note');
     $('#calendar').find('button').hide('button');
 
@@ -17,7 +16,8 @@ $('document').ready(function(){
     $('.calendar-day').click(function(){
         $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + $('.select-date').text());
         $('.modal-title').text($('#select-month').text() +' / '+ $('.select-date').text() +' / '+ $('#select-year').text());
-
+        var day = $('.select-date').text();
+        $('#input-date'+ ' ' + day + ' ' + ' .note-wrapper').html();
 
 
 
