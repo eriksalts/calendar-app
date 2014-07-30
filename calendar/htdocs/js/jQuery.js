@@ -47,7 +47,7 @@ $('document').ready(function(){
 
             $.ajax({
                 type: "POST", // HTTP method POST or GET
-                url: "index.php/note", //Where to make Ajax calls
+                url: "note", //Where to make Ajax calls
                 data: deleteData, //Form variables
                 success:function(response){
                     //on success, hide  element user wants to delete.
@@ -96,7 +96,7 @@ $('document').ready(function(){
 
             $.ajax({
                 type: "POST", // HTTP method POST or GET
-                url: "index.php/note", //Where to make Ajax calls
+                url: "note", //Where to make Ajax calls
                 data: myData, //Form variables
                 success:function(response){
                     $("#responds").append(response);
