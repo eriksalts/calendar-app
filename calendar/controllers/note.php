@@ -9,9 +9,13 @@ class note_controller extends base_controller
             $note->save();
             return 'saved';
         }
-//        if ($_POST['action'] == 'delete') {
-//            $note = DELETE FROM add_delete_record WHERE id="note"
-//        }
+        if ($_POST['action'] == 'delete') {
+            $id = $_POST['id'];
+            $sql = "DELETE FROM notes WHERE id=$id;";
+            //$sql = "INSERT INTO notes (date, title, body) VALUES (\"$this->date\",\"$this->title\",\"$this->body\");";
+            $result = mysql::query('main', $sql);
+            return $result;
+        }
     }
 
     public function submit()

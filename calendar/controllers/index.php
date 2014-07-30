@@ -88,7 +88,7 @@ class index_controller extends base_controller
 
             /* keep going with days.... */
                         for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-                            $calendar.= '<td class="calendar-day" id="input-date ' . $list_day . '">';
+                            $calendar.= '<td class="calendar-day" id="input-date-' . $list_day . '">';
                             /* add in the day number */
                             $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
@@ -101,10 +101,10 @@ class index_controller extends base_controller
                 //$debug = $sql;
 
                 foreach ($result as $note) {
-                   $calendar .= '<div class="note-present"' . $note['id'] . '"></div>';
+//                   $calendar .= '<div class="note-present" "id="'. $note['id'] .'"></div>';
 
-                  $calendar .= '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'] . '</div>';
-                  $calendar .= '<button id="delete-button" type="button" class="btn btn-danger">Delete</button>';
+                  $calendar .= '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'];
+                  $calendar .= '<button data-id="' . $note['id'] . '" type="button" class="btn btn-danger delete-button">Delete</button></div>';
                 }
                 $calendar .= '</div>';
 

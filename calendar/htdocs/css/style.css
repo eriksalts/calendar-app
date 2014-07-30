@@ -58,3 +58,11 @@
     background-color:#5882FA;
 
 }
+
+.btn-danger {
+    display: none;
+}
+
+.modal .btn-danger {
+    display: block;
+}

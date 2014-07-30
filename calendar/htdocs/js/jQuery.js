@@ -1,29 +1,69 @@
 $('document').ready(function(){
 
 
-    //$('.note-view').html( $('.note-wrapper').append());
-    //$('.note-wrapper').attr('id', 'input-date');
 
-    $('#calendar').find('.note').hide('.note');
-    $('#calendar').find('button').hide('button');
+
+//   $('#calendar').find('.note').hide('.note');
+//   $('#calendar').find('button').hide('button');
+//    $('.note-present').find('.note').show('.note');
+//    $('.note-present').find('button').show('button');
+
 
 
     $('.calendar-day').hover(
         function(){ $(this).addClass('select-date') },
         function(){ $(this).removeClass('select-date') }
     );
-    var day = $('.select-date').text();
+
+
+
 
     $('.calendar-day').click(function(){
-        $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + $('.select-date').text());
-        $('.modal-title').text($('#select-month').text() +' / '+ $('.select-date').text() +' / '+ $('#select-year').text());
-        //var day = $('.select-date').text();
 
+        //$('.note-view').html( $('.note-wrapper').append());
+        var day = $('.select-date .day-number').text();
+        //$('.note-wrapper').attr('id','input-date-'+ day );
         var chosen = $('#input-date-'+ day + ' ' + '.note-wrapper').html();
-       $(chosen).html($('.note-view').html());
+        $('.note-view').html(chosen);
+
+
+        $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + day);
+
+        $('#myModalLabel').text($('#select-month').text() +' / '+ day +' / '+ $('#select-year').text());
+//        $('.note-view').append(chosen);
+//        var chosen = $('#input-date-'+ day).html();
 
        //Bootstrap API
         $('#Modal').modal('show');
+
+
+        $('.delete-button').click(function (e) {
+            var id = $(this).attr('data-id');
+            var deleteData = {
+                action: 'delete',
+                id: id
+            };
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST", // HTTP method POST or GET
+                url: "note", //Where to make Ajax calls
+                data: deleteData, //Form variables
+                success:function(response){
+                    //on success, hide  element user wants to delete.
+                    console.log();
+                    $('.note#'+id).hide();
+                    $('.note#'+id).fadeOut();
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                    console.log(thrownError);
+                    //On error, we alert user
+                    alert(thrownError);
+                }
+            });
+        });
+
+
     });
 
 
@@ -54,13 +94,11 @@ $('document').ready(function(){
                 body: $('#body').val()
             }
 
-            console.log(myData);
             $.ajax({
                 type: "POST", // HTTP method POST or GET
                 url: "note", //Where to make Ajax calls
                 data: myData, //Form variables
                 success:function(response){
-                    console.log(response);
                     $("#responds").append(response);
                     $("#title, #body").val(''); //empty text field on successful
                     $("#formsubmit").show(); //show submit button
@@ -76,27 +114,5 @@ $('document').ready(function(){
             });
         });
 
-        var deleteData = {
-            action: 'delete',
-            id: $('#note').attr('id')
-        };
-        $("#delete-button").click(function (e) {
-            e.preventDefault();
-
-            $.ajax({
-                type: "POST", // HTTP method POST or GET
-                url: "note", //Where to make Ajax calls
-                dataType:"text", // Data type, HTML, json etc.
-                data:deleteData, //Form variables
-                success:function(response){
-                    //on success, hide  element user wants to delete.
-                    $('#note').fadeOut();
-                },
-                error:function (xhr, ajaxOptions, thrownError){
-                    //On error, we alert user
-                    alert(thrownError);
-                }
-            });
-        });
 
 });
