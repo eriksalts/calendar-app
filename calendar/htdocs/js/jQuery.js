@@ -1,42 +1,19 @@
 $('document').ready(function(){
-
-
-
-
-//   $('#calendar').find('.note').hide('.note');
-//   $('#calendar').find('button').hide('button');
-//    $('.note-present').find('.note').show('.note');
-//    $('.note-present').find('button').show('button');
-
-
-
     $('.calendar-day').hover(
         function(){ $(this).addClass('select-date') },
         function(){ $(this).removeClass('select-date') }
     );
-
-
-
-
+    $('.note').closest('.calendar-day').addClass('note-days');
+    //loading modal
     $('.calendar-day').click(function(){
-
-        //$('.note-view').html( $('.note-wrapper').append());
         var day = $('.select-date .day-number').text();
-        //$('.note-wrapper').attr('id','input-date-'+ day );
         var chosen = $('#input-date-'+ day + ' ' + '.note-wrapper').html();
         $('.note-view').html(chosen);
-
-
         $('#input-date').val($('#select-year').text() + '-' + $('#select-month').text() + '-' + day);
-
         $('#myModalLabel').text($('#select-month').text() +' / '+ day +' / '+ $('#select-year').text());
-//        $('.note-view').append(chosen);
-//        var chosen = $('#input-date-'+ day).html();
-
        //Bootstrap API
         $('#Modal').modal('show');
-
-
+        //delete ajax
         $('.delete-button').click(function (e) {
             var id = $(this).attr('data-id');
             var deleteData = {
@@ -44,38 +21,22 @@ $('document').ready(function(){
                 id: id
             };
             e.preventDefault();
-
             $.ajax({
-                type: "POST", // HTTP method POST or GET
-                url: "/note", //Where to make Ajax calls
-                data: deleteData, //Form variables
+                type: "POST",
+                url: "note",
+                data: deleteData,
                 success:function(response){
-                    //on success, hide  element user wants to delete.
-                    console.log();
-                    $('.note#'+id).hide();
-                    $('.note#'+id).fadeOut();
+//                    $('.note#'+id).fadeOut();
+                    $('#Modal .note#'+id).fadeOut();
+                    alert("Success! Refresh to see deletions.");
                 },
                 error:function (xhr, ajaxOptions, thrownError){
-
-                    //On error, we alert user
                     alert(thrownError);
                 }
             });
-        });
-
-
+        });//end delete
     });
-
-
-//    $( ".note-view").replaceWith( "note" );
-
-
-   // $( ".note-present" ).parent().addClass('note-background');
-
-
-//    $('td').children('.note-wrapper').remove('.note-wrapper');
-
-      //////////////////////////////////////////////////////////////
+        //submit note
         $("#form-submit").click(function (e) {
             e.preventDefault();
             if( $("#title").val() === '' || $('#body').val() === '')
@@ -83,36 +44,24 @@ $('document').ready(function(){
                 alert("Please enter some text!");
                 return false;
             }
-
-            $("#formsubmit").hide(); //hide submit button
-
-
             var myData = {
                 action: 'new',
                 date: $('#input-date').val(),
                 title: $('#title').val(),
                 body: $('#body').val()
             }
-
+            var id = $(this).attr('data-id');
             $.ajax({
-                type: "POST", // HTTP method POST or GET
-                url: "/note", //Where to make Ajax calls
-                data: myData, //Form variables
+                type: "POST",
+                url: "note",
+                data: myData,
                 success:function(response){
-                    $("#responds").append(response);
-                    $("#title, #body").val(''); //empty text field on successful
-                    $("#formsubmit").show(); //show submit button
-
-                    alert("Success!");
-
+                    $("#title, #body").val('');
+                    alert("Success! Refresh to see additions.");
                 },
                 error:function (xhr, ajaxOptions, thrownError){
-
-                    $("#formsubmit").show(); //show submit button
                     alert(thrownError);
                 }
             });
-        });
-
-
+        }); //end note
 });

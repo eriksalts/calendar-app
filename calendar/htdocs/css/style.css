@@ -30,9 +30,6 @@
     color:red;
 }
 
-#main-calendar .calendar-day-today{
-    background-color: #2E9AFE;
-}
 .input-group{
     margin: auto;
     margin-top: 30px;
@@ -41,23 +38,11 @@
 }
 .calendar-title{
     text-align: center;
-
-}
-#select-year{
-    display: inline-block;
-
-}
-#select-month{
-    display: inline-block;
-
 }
 #title-date{
     text-align: center;
 }
-.note-background{
-    background-color:#5882FA;
 
-}
 
 .btn-danger {
     display: none;
@@ -65,4 +50,24 @@
 
 .modal .btn-danger {
     display: block;
+}
+.note{
+    display: none;
+}
+.note-view .note{
+    display: block;
+}
+.note-days{
+    background-color: #BDBDBD;
+    opacity: .8;
+}
+.control{
+    display: none;
+}
+#date-picker-month,
+#date-picker-year,
+#date-picker-btn{
+    /*display: table;*/
+    text-align: center;
+
 }

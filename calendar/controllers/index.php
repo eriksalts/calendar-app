@@ -10,7 +10,7 @@ class index_controller extends base_controller
 //        $month_display = date('n');
         $this->month = (int) ($_POST['month'] ? $_POST['month'] : date('n'));
         $this->year = (int)  ($_POST['year'] ? $_POST['year'] : date('Y'));
-
+        $this->monthtext = (int) ($_POST['month'] ? $_POST['month'] : date('F'));
         $this->controls = $this->calendar_controls();
         $this->calendar = $this->draw_calendar();
         $this->calendar_title = $this->draw_calendar_title();
@@ -19,8 +19,7 @@ class index_controller extends base_controller
     }
 
     private function draw_calendar_title(){
-        $today = '<div id="select-date">'. date('n'). ' </div>';
-        $calendar_title = '<div id="title-date"><span><h1 class="calendar-title" id="select-month">'.$this->month.'</h1></span><span><h1 ><small id="select-year">'.$this->year.'</small></h1></span></div>';
+        $calendar_title = '<div id="title-date"><h1 class="calendar-title" id="select-month">'.$this->month.'</h1><h1><small id="select-year">'.$this->year.'</small></h1></div>';
         return $calendar_title;
     }
 
@@ -31,29 +30,29 @@ class index_controller extends base_controller
         $year = (int)  ($_POST['year'] ? $_POST['year'] : date('Y'));
 
         /* select month control */
-        $select_month_control = '<select name="month" id="month">';
+        $select_month_control = '<div class="col-lg-4"><select class="form-control" name="month" id="month">';
         for($x = 1; $x <= 12; $x++) {
         $select_month_control.= '<option value="'.$x.'"'.($x != $month ? '' : ' selected="selected"').'>'.date('F',mktime(0,0,0,$x,1,$year)).'</option>';
         }
-        $select_month_control.= '</select>';
+        $select_month_control.= '</select></div>';
 
         /* select year control */
         $year_range = 10;
-        $select_year_control = '<select name="year" id="year">';
+        $select_year_control = '<div class="col-lg-4" id="date-picker-month"><select class="form-control"  name="year" id="year">';
         for($x = ($year-floor($year_range/2)); $x <= ($year+floor($year_range/2)); $x++) {
             $select_year_control.= '<option value="'.$x.'"'.($x != $year ? '' : ' selected="selected"').'>'.$x.'</option>';
         }
-        $select_year_control.= '</select>';
+        $select_year_control.= '</select></div>';
 
         /* "next month" control */
         $next_month_link = '<a href="?month='.($month != 12 ? $month + 1 : 1).'&year='.($month != 12 ? $year : $year + 1).'" class="control">Next Month >></a>';
 
         /* "previous month" control */
         $previous_month_link = '<a href="?month='.($month != 1 ? $month - 1 : 12).'&year='.($this->month != 1 ? $year : $year - 1).'" class="control"><< 	Previous Month</a>';
-
+        $controls ='<div class="container" id="date-picker-year"><div class="row">';
         /* bringing the controls together */
-        $controls = '<form method="post">'.$select_month_control.$select_year_control.' <input type="submit" name="submit" value="Submit" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
-
+        $controls .= '<form id="date-picker" method="post">'.$select_month_control.$select_year_control.'<div class="col-lg-4"><input type="submit" id="date-picker-btn" class="btn btn-primary" name="submit" value="Submit" /></div>      '.$previous_month_link.'     '.$next_month_link.' </form>';
+        $controls .= '</div></div>';
         return $controls;
     }
 
@@ -101,7 +100,7 @@ class index_controller extends base_controller
                 //$debug = $sql;
 
                 foreach ($result as $note) {
-//                   $calendar .= '<div class="note-present" "id="'. $note['id'] .'"></div>';
+//                   $calendar .= '<div class="note-present"></div>';
 
                   $calendar .= '<div class="note" id="' . $note['id'] . '">' . $note['title'] . $note['body'];
                   $calendar .= '<button data-id="' . $note['id'] . '" type="button" class="btn btn-danger delete-button">Delete</button></div>';
