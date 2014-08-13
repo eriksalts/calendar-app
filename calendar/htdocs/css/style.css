@@ -9,15 +9,16 @@
     border: none !important;
 }
 #main-calendar td{
-    border-radius: 50px !important;
-    width: 100px;
-    height: 100px;
+    border-radius: 50% !important;
+    width: 125px;
+    height: 125px;
     border-collapse: separate !important;
 }
 .day-number{
     display: table;
     margin: auto;
     font-size: 70px;
+    z-index: 1;
 }
 #main-calendar .calendar-day-head{
 
@@ -65,9 +66,27 @@
     display: none;
 }
 #date-picker-month,
-#date-picker-year,
+#date-picker-year{
+    display: inline-table;
+    margin:8px 20px 5px 20px;
+}
 #date-picker-btn{
-    /*display: table;*/
-    text-align: center;
+    display: inline-table;
+    margin:5px 20px 5px 20px;
+}
+.nav-control{
+    width: 100px;
+    margin: 20px;
+}
+.note{
+    margin: 10px;
 
+}
+.delete-button{
+    margin:10px;
+    float: right;
+}
+.badge{
+    position: relative;
+    background-color: red;
 }

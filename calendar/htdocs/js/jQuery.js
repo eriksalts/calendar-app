@@ -1,9 +1,21 @@
 $('document').ready(function(){
+    $('#login-modal').modal('show');
     $('.calendar-day').hover(
         function(){ $(this).addClass('select-date') },
         function(){ $(this).removeClass('select-date') }
     );
+
+//    var day = $('.select-date .day-number').text();
+//   var badgeCount = $("div[id^='badge-date-']");
+//    var count = $("div[id^='note-']");
+//    var badgeCount = $(count > 'div').length;
+//    $('.note').closest('.calendar-day').prepend('<span class="badge pull-right">' + badgeCount + '</span>');
+
+
+
+    var day = $('.select-date .day-number').text();
     $('.note').closest('.calendar-day').addClass('note-days');
+
     //loading modal
     $('.calendar-day').click(function(){
         var day = $('.select-date .day-number').text();
@@ -26,9 +38,8 @@ $('document').ready(function(){
                 url: "note",
                 data: deleteData,
                 success:function(response){
-//                    $('.note#'+id).fadeOut();
                     $('#Modal .note#'+id).fadeOut();
-                    alert("Success! Refresh to see deletions.");
+//                    alert("Success! Refresh to see deletions.");
                 },
                 error:function (xhr, ajaxOptions, thrownError){
                     alert(thrownError);
@@ -50,13 +61,22 @@ $('document').ready(function(){
                 title: $('#title').val(),
                 body: $('#body').val()
             }
-            var id = $(this).attr('data-id');
+           // var id = $(this).attr('data-id');
             $.ajax({
                 type: "POST",
                 url: "note",
                 data: myData,
                 success:function(response){
-                    $("#title, #body").val('');
+                 //   console.log("works?");
+// else{
+
+//                        $('.note-days #input-date-'+ day).html('<span class="badge pull-right">42</span>');
+//                    }
+
+                  // var day = $('.select-date .day-number').text();
+
+                   // $("#title, #body").val('');
+                   // $('.select-date').addClass('note-days');
                     alert("Success! Refresh to see additions.");
                 },
                 error:function (xhr, ajaxOptions, thrownError){
