@@ -143,6 +143,5 @@ class index_controller extends base_controller
         return $calendar;
     }
 }
-//<div class="form-control" id="date-picker-month">
 
 ?>
