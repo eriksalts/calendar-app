@@ -23,10 +23,10 @@ require "../../autoload.php"; // makes ure this points to where you put crossbar
 
 mysql::database_config(
 		'main',			// alias
-		'127.0.0.1',	// host
+		'localhost',	// host
 		'calendar',		// database
 		'root',		// username
-		'root'		// password
+		'UtYrxvBjSu'		// password
 		);
 
 
